@@ -56,7 +56,7 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/">主页</a></li>
 	        
 			</ul>
 		</nav>
@@ -80,11 +80,7 @@
 				
 					<a class="github" target="_blank" href="https://github.com/irusist" title="github"><i class="icon-github"></i></a>
 		        
-					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-		        
 					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
 		        
 					<a class="mail" target="_blank" href="mailto:zhulx521@gmail.com" title="mail"><i class="icon-mail"></i></a>
 		        
@@ -121,11 +117,7 @@
 					
 						<a class="github" target="_blank" href="https://github.com/irusist" title="github"><i class="icon-github"></i></a>
 			        
-						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-			        
 						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
 			        
 						<a class="mail" target="_blank" href="mailto:zhulx521@gmail.com" title="mail"><i class="icon-mail"></i></a>
 			        
@@ -136,7 +128,7 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 100%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -152,6 +144,96 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-Java-8之Stream-API" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/30/Java-8之Stream-API/">Java 8之Stream API</a>
+    </h1>
+  
+
+        
+        <a href="/2015/12/30/Java-8之Stream-API/" class="archive-article-date">
+  	<time datetime="2015-12-30T14:07:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-12-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Stream-API简介"><a href="#Stream-API简介" class="headerlink" title="Stream API简介"></a>Stream API简介</h2><p>Java 8中定义了一个Stream的接口，与容器类类似，主要存放着一些元素，但与集合不同，它主要是对它内部的数据进行过滤，聚合等一些操作。它内部必须要有集合，数组等数据结构。</p>
+<h2 id="Stream对象的生成"><a href="#Stream对象的生成" class="headerlink" title="Stream对象的生成"></a>Stream对象的生成</h2><p>Stream对象可以通过集合，文件, String, Stream, StreamBuilder等来构建</p>
+<h3 id="通过集合来构建"><a href="#通过集合来构建" class="headerlink" title="通过集合来构建"></a>通过集合来构建</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;Integer&gt; stream = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>).stream()</span><br></pre></td></tr></table></figure>
+<h3 id="通过文件来构建"><a href="#通过文件来构建" class="headerlink" title="通过文件来构建"></a>通过文件来构建</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取文件内容</span></span><br><span class="line">Stream&lt;String&gt; lines = Files.lines(Paths.get(<span class="string">"/etc/hosts"</span>));</span><br><span class="line"><span class="comment">// 获取目录下的文件列表</span></span><br><span class="line">Stream&lt;Path&gt; paths = Files.list(Paths.get(<span class="string">"/etc/init.d"</span>));</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2015/12/30/Java-8之Stream-API/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java8</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/12/30/Java-8之Stream-API/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-Java-8之Lambda表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -191,11 +273,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java8</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Lambda</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Lambda</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java8</a>
         		</li>
       		
 		</ul>
@@ -334,7 +416,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 irusist
+    		&copy; 2018 irusist
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -421,15 +503,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Java8</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Lambda</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总结</a>
+                <a href="javascript:void(0)" class="js-tag color1">Java8</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -437,7 +515,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Map</a>
+                <a href="javascript:void(0)" class="js-tag color3">总结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -450,6 +528,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Scala</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Map</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -482,6 +564,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">投资</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java mat</a>
               </li>
             
             <div class="clearfix"></div>

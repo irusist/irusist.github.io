@@ -56,7 +56,7 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/">主页</a></li>
 	        
 			</ul>
 		</nav>
@@ -80,11 +80,7 @@
 				
 					<a class="github" target="_blank" href="https://github.com/irusist" title="github"><i class="icon-github"></i></a>
 		        
-					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-		        
 					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
 		        
 					<a class="mail" target="_blank" href="mailto:zhulx521@gmail.com" title="mail"><i class="icon-mail"></i></a>
 		        
@@ -121,11 +117,7 @@
 					
 						<a class="github" target="_blank" href="https://github.com/irusist" title="github"><i class="icon-github"></i></a>
 			        
-						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-			        
 						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
 			        
 						<a class="mail" target="_blank" href="mailto:zhulx521@gmail.com" title="mail"><i class="icon-mail"></i></a>
 			        
@@ -136,7 +128,7 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 100%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -215,6 +207,103 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2100/01/01/Github语言排行/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java的一些内存泄露" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/27/Java的一些内存泄露/">Java的一些内存泄露</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/27/Java的一些内存泄露/" class="archive-article-date">
+  	<time datetime="2017-11-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>
+最近有个后台项目开发环境报OOM， 最后利用mat分析出具体原因是，在开发环境，开发人员为了方便，用jboss的热部署来部署更新完的war包，重新部署后，会reload spring的容器类，
+但是有的类实例不能被卸载，导致有多个实例，之前存在的实例的定时任务一直在执行，最后导致OOM。 于是分析了具体不能被卸载的类，主要有以下2种情况：
+</p>
+
+<ul class="org-ul">
+<li>存在定时任务没有被停止，造成有活跃的Thread，由于被根对象引用，造成不能被回收
+</li>
+<li>实例被静态单例的类实例引用，如果要回收这个实例，必须回收Class对象，但是Class对象ClassLoader引用，而ClassLoader不能被回收的话，造成静态实例不能被回收。
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/11/27/Java的一些内存泄露/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java mat</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/27/Java的一些内存泄露/">展开全文 >></a>
         </p>
       
 
@@ -385,6 +474,24 @@
 <li><a href="http://gaoya.blog.163.com/blog/static/60278066201074113815688/" target="_blank" rel="noopener">http://gaoya.blog.163.com/blog/static/60278066201074113815688/</a>
 </li>
 <li><a href="http://gaoya.blog.163.com/blog/static/6027806620107179221158/" target="_blank" rel="noopener">http://gaoya.blog.163.com/blog/static/6027806620107179221158/</a>
+</li>
+<li><a href="http://gaoya.blog.163.com/blog/static/602780662010829347981/" target="_blank" rel="noopener">http://gaoya.blog.163.com/blog/static/602780662010829347981/</a>
+</li>
+<li><a href="http://gaoya.blog.163.com/blog/static/60278066201081312125992/" target="_blank" rel="noopener">http://gaoya.blog.163.com/blog/static/60278066201081312125992/</a>
+</li>
+<li><a href="http://gaoya.blog.163.com/blog/static/60278066201099102513505/" target="_blank" rel="noopener">http://gaoya.blog.163.com/blog/static/60278066201099102513505/</a>
+</li>
+<li><a href="http://gaoya.blog.163.com/blog/static/6027806620109286594389/" target="_blank" rel="noopener">http://gaoya.blog.163.com/blog/static/6027806620109286594389/</a>
+</li>
+<li><a href="http://gaoya.blog.163.com/blog/static/60278066201010193750848/" target="_blank" rel="noopener">http://gaoya.blog.163.com/blog/static/60278066201010193750848/</a>
+</li>
+<li><a href="http://gaoya.blog.163.com/blog/static/602780662010101815615626/" target="_blank" rel="noopener">http://gaoya.blog.163.com/blog/static/602780662010101815615626/</a>
+</li>
+<li><a href="http://gaoya.blog.163.com/blog/static/60278066201010244503431/" target="_blank" rel="noopener">http://gaoya.blog.163.com/blog/static/60278066201010244503431/</a>
+</li>
+<li><a href="http://gaoya.blog.163.com/blog/static/602780662010102893937970/" target="_blank" rel="noopener">http://gaoya.blog.163.com/blog/static/602780662010102893937970/</a>
+</li>
+<li><a href="http://gaoya.blog.163.com/blog/static/6027806620101119541203/" target="_blank" rel="noopener">http://gaoya.blog.163.com/blog/static/6027806620101119541203/</a>
 </li>
 <li></li>
 </ul>
@@ -1028,106 +1135,6 @@
 
 
   
-    <article id="post-Play框架学习之Action组合" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/09/Play框架学习之Action组合/">Play框架学习之Action组合</a>
-    </h1>
-  
-
-        
-        <a href="/2016/01/09/Play框架学习之Action组合/" class="archive-article-date">
-  	<time datetime="2016-01-09T15:21:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Play2中，可以组合多个<code>Action</code></p>
-<h2 id="自定义Action"><a href="#自定义Action" class="headerlink" title="自定义Action"></a>自定义Action</h2><p>可以通过继承<code>ActionBuilder</code>来定义一个Action，Play2中自带的Action就是一个默认实现，如下是自定义一个<code>Action</code>，用于对每个请求打印信息。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">LoggingAction</span> <span class="keyword">extends</span> <span class="title">ActionBuilder</span>[<span class="type">Request</span>] </span>&#123;</span><br><span class="line">   <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">invokeBlock</span></span>[<span class="type">A</span>](request: <span class="type">Request</span>[<span class="type">A</span>], block: (<span class="type">Request</span>[<span class="type">A</span>]) =&gt; <span class="type">Future</span>[<span class="type">Result</span>]) = &#123;</span><br><span class="line">     <span class="type">Logger</span>.info(<span class="string">"Calling action"</span>)</span><br><span class="line">     block(request)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以通过如下的方法来使用这个自定义的<code>Action</code>:</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">custom</span></span>() = <span class="type">LoggingAction</span> &#123;</span><br><span class="line">    <span class="type">Ok</span>(<span class="string">"custom action"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样，在每次请求时就会打印“Calling action”信息。</p>
-        
-          <a class="article-more-a" href="/2016/01/09/Play框架学习之Action组合/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Play2</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Play</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Scala</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Play//" class="article-tag-list-link color5">Play</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/09/Play框架学习之Action组合/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1142,7 +1149,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 irusist
+    		&copy; 2018 irusist
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1229,15 +1236,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Java8</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Lambda</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总结</a>
+                <a href="javascript:void(0)" class="js-tag color1">Java8</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1245,7 +1248,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Map</a>
+                <a href="javascript:void(0)" class="js-tag color3">总结</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1258,6 +1261,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Scala</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Map</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1290,6 +1297,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">投资</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Java mat</a>
               </li>
             
             <div class="clearfix"></div>

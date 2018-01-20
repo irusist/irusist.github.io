@@ -6,18 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://irusist.github.io">
-  <title>Archives: 2016 | irusist - 坚持是一种美德</title>
+  <title>Java的一些内存泄露 | irusist - 坚持是一种美德</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java, Scala, Golang等开发">
-<meta property="og:type" content="website">
-<meta property="og:title" content="irusist - 坚持是一种美德">
-<meta property="og:url" content="http://irusist.github.io/archives/2016/page/2/index.html">
+  <meta name="description" content="最近有个后台项目开发环境报OOM， 最后利用mat分析出具体原因是，在开发环境，开发人员为了方便，用jboss的热部署来部署更新完的war包，重新部署后，会reload spring的容器类， 但是有的类实例不能被卸载，导致有多个实例，之前存在的实例的定时任务一直在执行，最后导致OOM。 于是分析了具体不能被卸载的类，">
+<meta name="keywords" content="Java mat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java的一些内存泄露">
+<meta property="og:url" content="http://irusist.github.io/2017/11/27/Java的一些内存泄露/index.html">
 <meta property="og:site_name" content="irusist - 坚持是一种美德">
-<meta property="og:description" content="Java, Scala, Golang等开发">
+<meta property="og:description" content="最近有个后台项目开发环境报OOM， 最后利用mat分析出具体原因是，在开发环境，开发人员为了方便，用jboss的热部署来部署更新完的war包，重新部署后，会reload spring的容器类， 但是有的类实例不能被卸载，导致有多个实例，之前存在的实例的定时任务一直在执行，最后导致OOM。 于是分析了具体不能被卸载的类，主要有以下2种情况：    存在定时任务没有被停止，造成有活跃的Thread，">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://irusist.github.io/2017/11/27/Java的一些内存泄露/TimerLeakBefore.png">
+<meta property="og:image" content="http://irusist.github.io/2017/11/27/Java的一些内存泄露/TimerLeakBeforeRootPath.png">
+<meta property="og:image" content="http://irusist.github.io/2017/11/27/Java的一些内存泄露/TimerLeakAfter.png">
+<meta property="og:image" content="http://irusist.github.io/2017/11/27/Java的一些内存泄露/StaticContainerLeakBefore.png">
+<meta property="og:image" content="http://irusist.github.io/2017/11/27/Java的一些内存泄露/StaticContainerLeakBeforeRootPath.png">
+<meta property="og:image" content="http://irusist.github.io/2017/11/27/Java的一些内存泄露/StaticContainerLeakAfter.png">
+<meta property="og:updated_time" content="2017-12-23T10:18:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="irusist - 坚持是一种美德">
-<meta name="twitter:description" content="Java, Scala, Golang等开发">
+<meta name="twitter:title" content="Java的一些内存泄露">
+<meta name="twitter:description" content="最近有个后台项目开发环境报OOM， 最后利用mat分析出具体原因是，在开发环境，开发人员为了方便，用jboss的热部署来部署更新完的war包，重新部署后，会reload spring的容器类， 但是有的类实例不能被卸载，导致有多个实例，之前存在的实例的定时任务一直在执行，最后导致OOM。 于是分析了具体不能被卸载的类，主要有以下2种情况：    存在定时任务没有被停止，造成有活跃的Thread，">
+<meta name="twitter:image" content="http://irusist.github.io/2017/11/27/Java的一些内存泄露/TimerLeakBefore.png">
   
     <link rel="alternative" href="/atom.xml" title="irusist - 坚持是一种美德" type="application/atom+xml">
   
@@ -143,52 +152,246 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Java的一些内存泄露" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/01/04/Java-8之Collector/" class="archive-article-date">
-  	<time datetime="2016-01-04T13:17:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-04</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/04/Java-8之Collector/">Java 8之Collector</a>
+    <h1 class="article-title" itemprop="name">
+      Java的一些内存泄露
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/11/27/Java的一些内存泄露/" class="archive-article-date">
+  	<time datetime="2017-11-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+
+<p>
+最近有个后台项目开发环境报OOM， 最后利用mat分析出具体原因是，在开发环境，开发人员为了方便，用jboss的热部署来部署更新完的war包，重新部署后，会reload spring的容器类，
+但是有的类实例不能被卸载，导致有多个实例，之前存在的实例的定时任务一直在执行，最后导致OOM。 于是分析了具体不能被卸载的类，主要有以下2种情况：
+</p>
+
+<ul class="org-ul">
+<li>存在定时任务没有被停止，造成有活跃的Thread，由于被根对象引用，造成不能被回收
+</li>
+<li>实例被静态单例的类实例引用，如果要回收这个实例，必须回收Class对象，但是Class对象ClassLoader引用，而ClassLoader不能被回收的话，造成静态实例不能被回收。
+</li>
+</ul>
+
+<a id="more"></a>
+
+<p>
+以下用测试程序说明下：
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">定时任务没有被停止</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">修改之前</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+类对象
+</p>
+<div class="org-src-container">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimerLeak</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> Timer timer = <span class="keyword">new</span> Timer();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TimerLeak</span><span class="params">()</span> </span>{</span><br><span class="line">	timer.schedule(<span class="keyword">new</span> TimerTask() {</span><br><span class="line">	    <span class="annotation">@Override</span></span><br><span class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">	    }</span><br><span class="line">	}, <span class="number">0</span>, <span class="number">5000</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+加载Spring Bean并reload
+</p>
+<div class="org-src-container">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>{</span><br><span class="line">	ClassPathXmlApplicationContext ctx = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"appContext.xml"</span>);</span><br><span class="line">	ctx.getBean(<span class="string">"timerLeak"</span>);</span><br><span class="line">	ctx.refresh();</span><br><span class="line">	Thread.currentThread().join();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+mat分析dump得到如下
+</p>
+
+
+<div class="figure">
+<p><img src="TimerLeakBefore.png" alt="TimerLeakBefore.png">
+</p>
+</div>
+
+<p>
+查看被哪个根路径引用
+</p>
+
+
+<div class="figure">
+<p><img src="TimerLeakBeforeRootPath.png" alt="TimerLeakBeforeRootPath.png">
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">修改之后</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+类对象
+</p>
+<div class="org-src-container">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimerLeak</span> <span class="keyword">implements</span> <span class="title">DisposableBean</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> Timer timer = <span class="keyword">new</span> Timer();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TimerLeak</span><span class="params">()</span> </span>{</span><br><span class="line">	timer.schedule(<span class="keyword">new</span> TimerTask() {</span><br><span class="line">	    <span class="annotation">@Override</span></span><br><span class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">	    }</span><br><span class="line">	}, <span class="number">0</span>, <span class="number">5000</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>{</span><br><span class="line">	timer.cancel();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+mat分析dump得到如下
+</p>
+
+
+<div class="figure">
+<p><img src="TimerLeakAfter.png" alt="TimerLeakAfter.png">
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">静态类实例引用</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">修改之前</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+类对象
+</p>
+
+<div class="org-src-container">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticContainerLeak</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>{</span><br><span class="line">	<span class="keyword">return</span> <span class="string">"test"</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</div>
+
+<div class="org-src-container">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticContainer</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, StaticContainerLeak&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addData</span><span class="params">(StaticContainerLeak containerLeak)</span> </span>{</span><br><span class="line">	map.put(containerLeak.getName(), containerLeak);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+reload spring的类
+</p>
+<div class="org-src-container">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>{</span><br><span class="line">	ClassPathXmlApplicationContext ctx = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"appContext.xml"</span>);</span><br><span class="line">	StaticContainer.addData(ctx.getBean(<span class="string">"staticContainerLeak"</span>, StaticContainerLeak.class));</span><br><span class="line">	ctx.refresh();</span><br><span class="line">	Thread.currentThread().join();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+mat分析dump得到如下
+</p>
+
+
+<div class="figure">
+<p><img src="StaticContainerLeakBefore.png" alt="StaticContainerLeakBefore.png">
+</p>
+</div>
+
+<p>
+查看被哪个根路径引用
+</p>
+
+
+<div class="figure">
+<p><img src="StaticContainerLeakBeforeRootPath.png" alt="StaticContainerLeakBeforeRootPath.png">
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2">修改之后</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+类对象
+</p>
+<div class="org-src-container">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticContainer</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, StaticContainerLeak&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addData</span><span class="params">(StaticContainerLeak containerLeak)</span> </span>{</span><br><span class="line">	map.put(containerLeak.getName(), containerLeak);</span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>{</span><br><span class="line">	map.clear();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</div>
+
+<div class="org-src-container">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringContextDestory</span> <span class="keyword">implements</span> <span class="title">DisposableBean</span> </span>{</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>{</span><br><span class="line">	StaticContainer.clear();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</div>
+
+<p>
+mat分析dump得到如下
+</p>
+
+
+<div class="figure">
+<p><img src="StaticContainerLeakAfter.png" alt="StaticContainerLeakAfter.png">
+</p>
+</div>
+
+
+<p>
+因此在开发时，尤其是中间件等框架，要注意：
+</p>
+
+<ul class="org-ul">
+<li>对象销毁时需要停止定时任务， 以及设置相关变量的值
+</li>
+<li>对引用外部实例的API，尤其注意要销毁清除
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java8</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java mat</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -201,175 +404,112 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://irusist.github.io/2017/11/27/Java的一些内存泄露/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/01/02/Java-8之Optional/" class="archive-article-date">
-  	<time datetime="2016-01-02T15:25:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-02</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2100/01/01/Github语言排行/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Github语言排行[人工置顶]
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/11/我的投资记录/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">我的投资记录</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/02/Java-8之Optional/">Java 8之Optional</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java8</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java//" class="article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/01/02/Java-8之default方法/" class="archive-article-date">
-  	<time datetime="2016-01-02T14:26:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/02/Java-8之default方法/">Java 8之default方法</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java8</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java8//" class="article-tag-list-link color1">Java8</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/01/02/Java-8之基本类型优化/" class="archive-article-date">
-  	<time datetime="2016-01-02T13:02:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/02/Java-8之基本类型优化/">Java 8之基本类型优化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java8</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java8//" class="article-tag-list-link color1">Java8</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2016/">&laquo; Prev</a><a class="page-number" href="/archives/2016/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
   
 
 
@@ -393,8 +533,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
